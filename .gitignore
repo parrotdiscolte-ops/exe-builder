@@ -1,0 +1,7 @@
+node_modules/
+build/
+*.exe
+*.o
+*.so
+.DS_Store
+*.log
