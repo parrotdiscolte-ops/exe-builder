@@ -1,0 +1,30 @@
+# Build outputs
+bin/
+obj/
+packages/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.tmp
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.sdf
+*.opensdf
+*.vcxproj.filters
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Temporary files
+*.tmp
+*.temp
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
