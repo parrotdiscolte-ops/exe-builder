@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkAnalyzer - Advanced Network Protocol Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌐 NetworkAnalyzer</h1>
+            <p>Advanced network protocol analysis and packet capture</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-button active" onclick="switchTab('capture')">Packet Capture</button>
+            <button class="tab-button" onclick="switchTab('protocols')">Protocol Analyzers</button>
+            <button class="tab-button" onclick="switchTab('proxy')">Proxy Module</button>
+            <button class="tab-button" onclick="switchTab('builder')">Code Builder</button>
+        </nav>
+
+        <!-- Packet Capture Tab -->
+        <div id="capture" class="tab-content active">
+            <div class="control-panel">
+                <h2>Network Capture Controls</h2>
+                <div class="controls">
+                    <select id="interface-select">
+                        <option value="">Select Network Interface</option>
+                        <option value="eth0">eth0</option>
+                        <option value="wlan0">wlan0</option>
+                        <option value="lo">loopback</option>
+                    </select>
+                    <input type="text" id="filter-input" placeholder="BPF Filter (e.g., tcp port 80)" />
+                    <button id="start-capture" onclick="startCapture()">Start Capture</button>
+                    <button id="stop-capture" onclick="stopCapture()" disabled>Stop Capture</button>
+                </div>
+            </div>
+            
+            <div class="packet-display">
+                <h3>Captured Packets</h3>
+                <div class="stats">
+                    <span>Packets: <span id="packet-count">0</span></span>
+                    <span>Bytes: <span id="byte-count">0</span></span>
+                    <span>Duration: <span id="capture-duration">00:00</span></span>
+                </div>
+                <div id="packet-list" class="packet-list">
+                    <!-- Packets will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Protocol Analyzers Tab -->
+        <div id="protocols" class="tab-content">
+            <h2>Protocol Analyzers</h2>
+            <div class="analyzer-grid">
+                <div class="analyzer-card">
+                    <h3>🔒 TLS Analyzer</h3>
+                    <p>Analyze TLS/SSL handshakes, cipher suites, and certificate chains</p>
+                    <button onclick="enableAnalyzer('tls')">Enable TLS Analysis</button>
+                    <div id="tls-results" class="results-panel"></div>
+                </div>
+                <div class="analyzer-card">
+                    <h3>📱 MQTT Analyzer</h3>
+                    <p>Monitor MQTT publish/subscribe patterns and message content</p>
+                    <button onclick="enableAnalyzer('mqtt')">Enable MQTT Analysis</button>
+                    <div id="mqtt-results" class="results-panel"></div>
+                </div>
+                <div class="analyzer-card">
+                    <h3>⚙️ Custom Protocol</h3>
+                    <p>Define and analyze custom network protocols</p>
+                    <button onclick="showCustomProtocolDialog()">Create Custom Analyzer</button>
+                    <div id="custom-results" class="results-panel"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proxy Module Tab -->
+        <div id="proxy" class="tab-content">
+            <h2>HTTP/HTTPS Proxy Module</h2>
+            <div class="proxy-controls">
+                <div class="control-group">
+                    <label for="proxy-port">Proxy Port:</label>
+                    <input type="number" id="proxy-port" value="8080" min="1024" max="65535" />
+                </div>
+                <div class="control-group">
+                    <label for="upstream-proxy">Upstream Proxy (optional):</label>
+                    <input type="text" id="upstream-proxy" placeholder="proxy.company.com:3128" />
+                </div>
+                <button id="start-proxy" onclick="startProxy()">Start Proxy</button>
+                <button id="stop-proxy" onclick="stopProxy()" disabled>Stop Proxy</button>
+            </div>
+            
+            <div class="proxy-logs">
+                <h3>Proxy Activity</h3>
+                <div id="proxy-log" class="log-display">
+                    <!-- Proxy logs will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Builder Tab (Original functionality) -->
+        <div id="builder" class="tab-content">
+            <h2>C++ Code Builder</h2>
+            <div class="builder-panel">
+                <textarea id="code-input" placeholder="Enter your C++ code here...">
+#include &lt;iostream&gt;
+int main() {
+    std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;
+    return 0;
+}</textarea>
+                <button onclick="buildCode()">Build Executable</button>
+                <div id="build-result" class="build-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Protocol Dialog -->
+    <div id="custom-protocol-dialog" class="dialog" style="display: none;">
+        <div class="dialog-content">
+            <h3>Create Custom Protocol Analyzer</h3>
+            <form id="custom-protocol-form">
+                <div class="form-group">
+                    <label for="protocol-name">Protocol Name:</label>
+                    <input type="text" id="protocol-name" required />
+                </div>
+                <div class="form-group">
+                    <label for="protocol-port">Port:</label>
+                    <input type="number" id="protocol-port" min="1" max="65535" required />
+                </div>
+                <div class="form-group">
+                    <label for="protocol-pattern">Message Pattern (hex):</label>
+                    <input type="text" id="protocol-pattern" placeholder="e.g., FF FE FD" />
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Create Analyzer</button>
+                    <button type="button" onclick="hideCustomProtocolDialog()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
