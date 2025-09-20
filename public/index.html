@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkAnalyzer - C++ Code Builder</title>
+    <meta name="description" content="Professional C++ code compilation tool with modern interface">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzIwNzNmZiIvPgo8cGF0aCBkPSJNOCAyMGw4LThsOCA4IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <!-- CodeMirror for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/monokai.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header" role="banner">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="40" height="40" rx="8" fill="#2073ff"/>
+                        <path d="M10 25l10-10l10 10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h1>NetworkAnalyzer</h1>
+                </div>
+                <div class="header-subtitle">
+                    <p>Professional C++ Code Builder</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content" role="main">
+            <div class="workspace">
+                <section class="editor-section" aria-labelledby="editor-heading">
+                    <div class="section-header">
+                        <h2 id="editor-heading">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M7 7l-3 3 3 3M13 7l3 3-3 3M11 4l-2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Source Code Editor
+                        </h2>
+                        <div class="editor-tools">
+                            <button type="button" class="btn-tool" id="clearCode" aria-label="Clear editor">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M2 2l12 12M2 14L14 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                Clear
+                            </button>
+                            <button type="button" class="btn-tool" id="loadSample" aria-label="Load sample code">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Sample
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="editor-wrapper">
+                        <label for="codeEditor" class="sr-only">C++ source code editor</label>
+                        <textarea id="codeEditor" 
+                                  placeholder="Enter your C++ code here..."
+                                  aria-describedby="editor-hint"
+                                  rows="20"></textarea>
+                        <div id="editor-hint" class="editor-hint">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M8 6v4M8 4h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            Write your C++ code using standard library includes and syntax. The compiler will build your code into an executable.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="build-section" aria-labelledby="build-heading">
+                    <div class="section-header">
+                        <h2 id="build-heading">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M10 2v3M10 15v3M2 10h3M15 10h3M4.22 4.22l2.12 2.12M13.66 13.66l2.12 2.12M4.22 15.78l2.12-2.12M13.66 6.34l2.12-2.12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            Build & Compile
+                        </h2>
+                    </div>
+                    
+                    <div class="build-controls">
+                        <button type="button" class="btn-primary" id="compileBtn" aria-describedby="compile-help">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <circle cx="10" cy="10" r="2" fill="currentColor"/>
+                                <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.93 4.93l1.41 1.41M13.66 13.66l1.41 1.41M4.93 15.07l1.41-1.41M13.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            <span class="btn-text">Compile Code</span>
+                            <div class="loading-spinner" aria-hidden="true"></div>
+                        </button>
+                        <div id="compile-help" class="help-text">
+                            Click to compile your C++ code using g++ compiler
+                        </div>
+                    </div>
+
+                    <div class="results-area">
+                        <div id="errorOutput" class="output-panel error-panel" role="alert" aria-live="polite" hidden>
+                            <div class="output-header">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M10 6v4M10 14h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                Compilation Errors
+                            </div>
+                            <pre class="output-content" id="errorContent"></pre>
+                        </div>
+
+                        <div id="successOutput" class="output-panel success-panel" hidden>
+                            <div class="output-header">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M7 10l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Compilation Successful
+                            </div>
+                            <div class="success-content">
+                                <p>Your C++ code has been successfully compiled!</p>
+                                <a href="#" id="downloadLink" class="btn-download" download="output.exe" aria-describedby="download-help">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M10 13l-4-4h8l-4 4zM10 13V2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M4 17h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    Download Executable
+                                </a>
+                                <div id="download-help" class="help-text">
+                                    Click to download your compiled executable file
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer" role="contentinfo">
+            <div class="footer-content">
+                <p>&copy; 2024 NetworkAnalyzer. Professional development tools.</p>
+                <div class="footer-links">
+                    <button type="button" class="footer-link" id="helpBtn" aria-label="Show help information">Help</button>
+                    <button type="button" class="footer-link" id="aboutBtn" aria-label="About NetworkAnalyzer">About</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal" role="dialog" aria-labelledby="help-title" aria-hidden="true">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="help-title">Help & Documentation</h3>
+                <button type="button" class="modal-close" aria-label="Close help dialog">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Getting Started</h4>
+                <ul>
+                    <li>Write your C++ code in the editor</li>
+                    <li>Click "Compile Code" to build your program</li>
+                    <li>Download the executable if compilation succeeds</li>
+                    <li>Fix any errors shown in the error panel</li>
+                </ul>
+                
+                <h4>Keyboard Shortcuts</h4>
+                <ul>
+                    <li><kbd>Ctrl + Enter</kbd> - Compile code</li>
+                    <li><kbd>Ctrl + L</kbd> - Clear editor</li>
+                    <li><kbd>F1</kbd> - Show this help</li>
+                    <li><kbd>Escape</kbd> - Close modals</li>
+                </ul>
+                
+                <h4>Supported Features</h4>
+                <ul>
+                    <li>Standard C++ library</li>
+                    <li>C++17 features</li>
+                    <li>Console applications</li>
+                    <li>Windows executable output</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>

@@ -8,6 +8,9 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+// Serve static files from public directory
+app.use(express.static('public'))
+
 const BUILD_DIR = './build'
 const OUTPUT_EXE = 'output.exe'
 if (!fs.existsSync(BUILD_DIR)) fs.mkdirSync(BUILD_DIR)
