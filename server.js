@@ -28,7 +28,7 @@ function cleanupTempFiles(srcPath, outPath) {
 
 // Input validation function
 function validateSourceCode(source) {
-  if (!source || typeof source !== 'string') {
+  if (typeof source !== 'string') {
     return { valid: false, error: 'Missing or invalid source code' }
   }
   
@@ -60,6 +60,11 @@ function validateSourceCode(source) {
 
 app.post('/sse', (req, res) => {
   const source = req.body.inputs?.source
+  
+  // Check if source is provided
+  if (source === undefined || source === null) {
+    return res.status(400).json({ error: 'Missing or invalid source code' })
+  }
   
   // Validate input
   const validation = validateSourceCode(source)
